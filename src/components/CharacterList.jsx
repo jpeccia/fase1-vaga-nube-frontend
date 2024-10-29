@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import "dotenv/config";
 import axios from 'axios';
 
 function PersonagemList() {
@@ -10,12 +11,12 @@ function PersonagemList() {
     }, []);
 
     const fetchCharacters = async () => {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}`);
+        const response = await axios.get(`${import.meta.env.REACT_APP_API_URL}`);
         setCharacters(response.data);
     };
 
     const deleteChar = async (id) => {
-        await axios.delete(`${process.env.REACT_APP_API_URL}/${id}`);
+        await axios.delete(`${import.meta.env.REACT_APP_API_URL}/${id}`);
         fetchCharacters();
     };
 
