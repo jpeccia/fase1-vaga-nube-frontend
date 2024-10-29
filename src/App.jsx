@@ -1,16 +1,16 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import PersonagemList from './PersonagemList';
-import PersonagemForm from './PersonagemForm';
-import PersonagemDetails from './PersonagemDetails';
+import CharacterList from './components/CharacterList';
+import CharacterForm from './components/CharacterForm'
+import CharacterDetails from './components/CharacterDetails';
 
 function App() {
     return (
         <Router>
             <Switch>
-                <Route path="/" exact component={PersonagemList} />
-                <Route path="/add" component={PersonagemForm} />
-                <Route path="/edit/:id" component={PersonagemForm} />
-                <Route path="/details/:id" component={PersonagemDetails} />
+                <Route path="/" exact component={CharacterList} />
+                <Route path="/add" component={CharacterForm} />
+                <Route path="/edit/:id" component={CharacterForm} />
+                <Route path="/details/:id" component={CharacterDetails} />
             </Switch>
         </Router>
     );
