@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate , useParams } from 'react-router-dom';
 import axios from 'axios';
 
 function CharacterForm() {
     const [character, setCharacter] = useState({ nome: '', classe: '', nivel: 1 });
     const { id } = useParams();
-    const history = useHistory();
+    const history = useNavigate();
 
     useEffect(() => {
         if (id) {
