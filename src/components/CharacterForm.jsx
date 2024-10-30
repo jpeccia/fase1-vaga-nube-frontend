@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useNavigate , useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 function CharacterForm() {
-    const [character, setCharacter] = useState({ nome: '', classe: '', nivel: 1 });
+    const [character, setCharacter] = useState({ name: '', characterClass: '', level: 1 });
     const { id } = useParams();
-    const history = useNavigate();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (id) {
@@ -14,22 +14,31 @@ function CharacterForm() {
     }, [id]);
 
     const fetchCharacter = async (id) => {
-        const response = await axios.get(`${import.meta.env.REACT_APP_API_URL}/${id}`);
-        setCharacter(response.data);
+        try {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/characters/${id}`);
+            setCharacter(response.data);
+        } catch (error) {
+            console.error('Erro ao buscar personagem:', error);
+        }
     };
 
     const handleChange = (e) => {
-        setCharacter({ ...character, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        setCharacter((prevCharacter) => ({ ...prevCharacter, [name]: value }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (id) {
-            await axios.put(`${import.meta.env.REACT_APP_API_URL}/${id}`, character);
-        } else {
-            await axios.post(`${import.meta.env.REACT_APP_API_URL}`, character);
+        try {
+            if (id) {
+                await axios.put(`${import.meta.env.VITE_API_URL}/characters/${id}`, character);
+            } else {
+                await axios.post(`${import.meta.env.VITE_API_URL}/characters/`, character);
+            }
+            navigate('/');
+        } catch (error) {
+            console.error('Erro ao salvar personagem:', error);
         }
-        history.push('/');
     };
 
     return (
@@ -37,13 +46,32 @@ function CharacterForm() {
             <h2>{id ? 'Editar Personagem' : 'Adicionar Personagem'}</h2>
             <form onSubmit={handleSubmit}>
                 <label>Nome:</label>
-                <input type="text" name="nome" value={character.nome} onChange={handleChange} required />
+                <input
+                    type="text"
+                    name="name"
+                    value={character.name}
+                    onChange={handleChange}
+                    required
+                />
 
                 <label>Classe:</label>
-                <input type="text" name="classe" value={character.classe} onChange={handleChange} required />
+                <input
+                    type="text"
+                    name="characterClass"
+                    value={character.characterClass}
+                    onChange={handleChange}
+                    required
+                />
 
                 <label>Nível:</label>
-                <input type="number" name="nivel" value={character.nivel} onChange={handleChange} required />
+                <input
+                    type="number"
+                    name="level"
+                    value={character.level}
+                    onChange={handleChange}
+                    required
+                    min="1"
+                />
 
                 <button type="submit">Salvar</button>
             </form>

@@ -11,7 +11,7 @@ function CharacterDetails() {
     }, [id]);
 
     const fetchCharacter = async (id) => {
-        const response = await axios.get(`${import.meta.env.REACT_APP_API_URL}/${id}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/characters/${id}`);
         setCharacter(response.data);
     };
 
@@ -20,10 +20,10 @@ function CharacterDetails() {
     return (
         <div>
             <h2>Detalhes do Personagem</h2>
-            <p><strong>Nome:</strong> {character.nome}</p>
-            <p><strong>Classe:</strong> {character.classe}</p>
-            <p><strong>Nível:</strong> {character.nivel}</p>
-            <p><strong>Experiência:</strong> {character.experiencia}</p>
+            <p><strong>Nome:</strong> {character.name}</p>
+            <p><strong>Classe:</strong> {character.characterClass}</p>
+            <p><strong>Nível:</strong> {character.level}</p>
+            <p><strong>Experiência:</strong> {character.exp}</p>
         </div>
     );
 }

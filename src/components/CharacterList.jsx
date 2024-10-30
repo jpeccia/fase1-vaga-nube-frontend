@@ -10,15 +10,28 @@ function CharacterList() {
     }, []);
 
     const fetchCharacters = async () => {
-        const response = await axios.get(`${import.meta.env.REACT_APP_API_URL}/characters`);
-        setCharacters(response.data);
-        console.log(response);
+        try {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/characters`);
+            if (Array.isArray(response.data)) {
+                setCharacters(response.data);
+            } else {
+                console.error('A resposta da API não é um array:', response.data);
+                setCharacters([]);
+            }
+        } catch (error) {
+            console.error('Erro ao buscar personagens:', error);
+        }
     };
 
     const deleteChar = async (id) => {
-        await axios.delete(`${import.meta.env.REACT_APP_API_URL}/characters/${id}`);
-        fetchCharacters();
+        try {
+            await axios.delete(`${import.meta.env.VITE_API_URL}/characters/${id}`);
+            fetchCharacters(); // Recarrega a lista após a exclusão
+        } catch (error) {
+            console.error('Erro ao deletar personagem:', error);
+        }
     };
+
     return (
         <div>
             <h2>Lista de Personagens</h2>
@@ -36,9 +49,9 @@ function CharacterList() {
                     {characters.length > 0 ? (
                         characters.map((character) => (
                             <tr key={character.id}>
-                                <td>{character.nome}</td>
-                                <td>{character.classe}</td>
-                                <td>{character.nivel}</td>
+                                <td>{character.name}</td>
+                                <td>{character.characterClass}</td>
+                                <td>{character.level}</td>
                                 <td>
                                     <Link to={`/edit/${character.id}`}>Editar</Link>
                                     <button onClick={() => deleteChar(character.id)}>Deletar</button>
