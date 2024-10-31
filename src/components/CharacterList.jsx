@@ -136,9 +136,9 @@ function CharacterList() {
                                 <TableData>{character.characterClass}</TableData>
                                 <TableData>{character.level}</TableData>
                                 <TableData>
+                                    <ActionLink to={`/details/${character.id}`}>Detalhes</ActionLink>
                                     <ActionLink to={`/edit/${character.id}`}>Editar</ActionLink>
                                     <ActionButton onClick={() => deleteChar(character.id)}>Deletar</ActionButton>
-                                    <ActionLink to={`/details/${character.id}`}>Detalhes</ActionLink>
                                 </TableData>
                             </TableRow>
                         ))
