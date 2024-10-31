@@ -1,8 +1,8 @@
 <h1 align="center" style="font-weight: bold;">Desafio Fase 1 - Rpg Character CRUD 💻</h1>
 
 <p align="center">
- <a href="#tech">Technologies</a> • 
- <a href="#started">Getting Started</a> • 
+ <a href="#tech">Tecnologias</a> • 
+ <a href="#started">Começando</a> • 
 </p>
 
 <p align="center">
@@ -10,17 +10,13 @@
     <b>Aplicação criada para um desafio de uma vaga.</b>
 </p>
 
-<p align="center">
-     <a href="PROJECT__URL">📱 Visit this Project</a>
-</p>
-
-<h2 id="technologies">💻 Technologies</h2>
+<h2 id="technologies">💻 Tecnologias</h2>
 
 - react
 - styled components
 - axios
 
-<h2 id="started">🚀 Getting started</h2>
+<h2 id="started">🚀 Começando</h2>
 
 <h3>Cloning</h3>
 
@@ -29,8 +25,6 @@ Clone o Repositório:
 git clone https://github.com/seu_usuario/seu_repositorio.git
 cd seu_repositorio/frontend
 ```
-
-<h3>Starting</h3>
 
 Instale as Dependências: Certifique-se de que você tenha o Node.js instalado. Execute o seguinte comando para instalar as dependências necessárias:
 
